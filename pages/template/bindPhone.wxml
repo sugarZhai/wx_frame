@@ -1,0 +1,38 @@
+<button class="bind-phone" open-type="getPhoneNumber" bindtap="compatiblePhoneNumber" bindgetphonenumber="getPhoneNumber" data-ilog="{{phonelog}}">
+</button>
+
+<view class='mask' class="{{isShowMask ? 'mask u-show' : 'mask u-hide'}}">
+  <view class='popup panel'>
+    <form>
+      <view class="form-item">
+        <label class="{{focusTel ? 'focus' : ''}}">手机号码</label>
+        <view class="flex-wrp">
+          <input value='{{telNumber}}' type='number' maxlength='13' bindinput='onTelNumberChange' bindblur='telInputBlur' bindtap='clickTelInput'></input>
+          <view class="{{msgCodeBtn.className}}" bindtap="{{msgCodeBtn.tap}}">{{msgCodeBtn.text}}</view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <label bindtap='checksumTap' class="{{focusVerifyCode ? 'focus' : ''}}">验证码</label>
+        <view class="verify-code">
+          <view class="mask-span" bindtap='checksumTap'>
+            <text>{{verifyCodeSpan[0]}}</text>
+            <text>{{verifyCodeSpan[1]}}</text>
+            <text>{{verifyCodeSpan[2]}}</text>
+            <text>{{verifyCodeSpan[3]}}</text>
+            <text>{{verifyCodeSpan[4]}}</text>
+            <text>{{verifyCodeSpan[5]}}</text> 
+          </view>
+          <view><input type='number' class="verifyInput" maxlength='6' value='{{verifyCode}}' bindblur='verifyInputBlur' bindinput='clickVerifyInput' focus='{{inputFocus}}' ></input></view>
+        </view>
+      </view>
+
+      <button class="{{isCanBind ? 'submitBtn' : 'disSubmit'}}" bindtap="{{isCanBind ? 'bindRightNow' : ''}}">立即领取</button>
+      <view class='tip'>领取即表示同意 <navigator url="/pages/agreement/index"><text>众安会员保险服务条例</text></navigator></view>
+    </form>
+    <view class='closeBtn'>
+      <image mode='widthFix' src='../../image/close.png' bindtap="closeMask"></image>
+    </view>
+  </view>
+  
+</view>

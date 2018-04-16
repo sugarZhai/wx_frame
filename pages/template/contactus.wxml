@@ -1,0 +1,33 @@
+<view class="mod-contact-us {{contactus_open=='1'?'contactus-open':''}}  {{isIpx ? 'bottom-heigh':''}}">
+    <view class="icon-phone"  bindtap="call_phone" data-ilog="6.1161.zS2">
+        <image src="/image/icon_phone.png"></image>
+    </view>
+    <button 
+      data-ilog="6.1161.iE7" 
+      bindtap = 'navTo' 
+      data-path ='../webViewKefu/index'
+      hover-class="none" 
+      class="icon-wechat" >
+        <image src="/image/icon_wechate.png"></image>
+    </button>
+
+    <view class="icon-server">
+      <block  wx:if='{{contactus_open== 1 ?true:false}}'  >
+        <view 
+          data-val="{{contactus_open=='1'?'0':'1'}}"  
+          data-ilog="6.1161.kQ3"
+          data-prop="contactus_open"  
+          bindtap="set_data"  
+          class="Xclose" >×</view>
+      </block>
+      <block  wx:else>
+        <image 
+          src="/image/icon_server.png" 
+          data-val="{{contactus_open=='1'?'0':'1'}}"  
+          data-ilog="6.1161.kQ3"
+          data-prop="contactus_open"  
+          bindtap="set_data" ></image> 
+      </block>
+         
+    </view>
+</view>

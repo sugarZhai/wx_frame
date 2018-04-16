@@ -1,0 +1,47 @@
+/* orderList.wxss */
+@charset "UTF-8";
+@import "../week.wxss";
+.policy-list{padding: 0 20rpx 0;}
+.policy-item{background: #fff;margin:30rpx 0;padding:30rpx;border-radius: 5px;box-shadow: 0 3px 10px 0px rgba(224, 233, 249,.5);}
+.policy-item .title{height: 50rpx;line-height: 50rpx;font-size:32rpx;color:#333;margin-bottom: 20rpx;}
+.policy-item .title .policy-page{font-size:28rpx;color:#22a2ae;}
+.policy-item .title .proccess::before{content: "";width: 8rpx; height: 32rpx;background: #00dbbf;display: inline-block;margin: 0 22rpx 0 -30rpx;}
+.policy-item .detail{font-size: 24rpx;color:#666;line-height: 40rpx;border-top:2rpx solid #ccc;padding-top: 20rpx;}
+.policy-item .detail .title{margin-bottom: 0rpx;}
+
+.policy-tip{padding: 30rpx 30rpx 0;position: relative;}
+.policy-tip image{width:100%;height: 120rpx;}
+.policy-tip .text{font-size: 24rpx;color:#999;position:absolute;top:38rpx;left:0;margin:0 10rpx 0 108rpx;line-height: 35rpx;background-color: #fff;}
+.policy-tip .secondLine{position:absolute;top:74rpx;left:0;}
+.policy-tip .thirdLine{position:absolute;top:110rpx;left:118rpx;}
+.green::before{background:#00dbbf!important;}
+.orange::before{background:#ffc73f!important; }
+.gray::before{background:#999999!important;  }
+.red::before{background:rgb(231,107,101)!important ; }
+.redFont{color:rgb(231,107,101) ;}
+.redQuestion{border: 1rpx solid rgb(231,107,101);border-radius: 50%;color:rgb(231,107,101);width:45rpx;height:45rpx;line-height: 45rpx;display: inline-block;text-align: center;}
+
+.img-logo{margin:20rpx 290rpx 120rpx;}
+.ui-logo1{position: fixed;left:0 ;bottom: 20rpx;}
+.font-999{color:#999!important;}
+.bg-fff{background: #fff;}
+
+
+.no-data{padding: 200rpx 0 400rpx;}
+.no-data image{width: 350rpx;height:300rpx;padding: 0 200rpx;}
+.no-data .txt{color:#999;text-align:center;padding: 50rpx 0 0;font-size:30rpx;}
+
+
+.unnormal{background: rgba(0,0,0,0.8);height: 100%;overflow: scroll;text-align: center;}
+.mashangfei{width: 750rpx;height: 1200rpx;}
+.unnormal image{width: 100%;height: 100%;}
+.phoneNum{display: inline-block;color:#22a2ae;}
+.longTap{display: inline-block;color:#999;}
+
+.orderFail{text-align: center;}
+.orderFailCtn{margin: 200rpx 100rpx;font-size: 30rpx;border-radius: 20rpx;}
+.positonBtn{width: 80rpx;height: 80rpx;position: absolute;right: 130rpx;top:200rpx;}
+.positonPhone{position: absolute;left: 0rpx;top:660rpx;text-align: center;width: 100%;}
+
+.fixedBtn{position: fixed;bottom:90rpx;left:338rpx;}
+.fixed-btn{margin-top: 50rpx;}

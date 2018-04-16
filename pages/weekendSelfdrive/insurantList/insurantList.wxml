@@ -1,0 +1,61 @@
+<!--insurantList.wxml-->
+<import src="../template/formView.wxml"/>
+<view class="container">
+  <view class="from-tip"> 最多可选择10位被保人</view>
+   <view class=" personItem ">
+    <view class="flex-item " bindtap="toggleSelfChecked">
+      <image class="icon" wx:if='{{selfChecked}}' src="../image/checked.png"></image>
+      <image class="icon" wx:else  src="../image/no-check.png"></image>
+    </view>
+    <view class="flex-item flex-6 personItem-right">
+      <view class="item item-name">
+        <text class="overHidden">{{maskSelfName}}</text> <text class="flag-self">本人</text>
+      </view>
+      <view class="item item-id">
+        同投保人 
+      </view>
+    </view>
+  </view> 
+
+  <view class=" personItem " wx:for="{{insurantList}}" wx:key='insurantList'>
+    <view class="flex-item " bindtap="toggleChecked" data-index='{{index}}'>
+     <image class="icon"  wx:if='{{item.checked}}' src="../image/checked.png"></image>
+      <image class="icon" wx:else  src="../image/no-check.png"></image>
+    </view>
+    <view class="flex-item flex-6 personItem-right" >
+      <view class="flex-wrp-index item item-name " >
+        <view>
+          <text class="overHidden">{{item.name}} </text>
+          <text class="flag-other" wx:if='{{item.relation===1}}'>父母</text>
+          <text class="flag-other" wx:elif= '{{item.relation===2}}'>配偶</text>
+          <text class="flag-other" wx:elif= '{{item.relation===3}}'>子女</text>
+          <text class="flag-other" wx:else>其他</text>
+        </view>
+        <view class="two-icon">
+          <view bindtap="deletItem" data-id='{{item.id}}' data-index='{{index}}'><image class="icon" src="../image/trash.png"></image></view>
+          <view bindtap="toEditInsurant" data-index='{{index}}'><image class="icon" src="../image/edit.png"></image></view>
+        </view>
+      </view>
+      <view class="item item-id" >
+        身份证号  {{item.idNo}}
+      </view>
+    </view>
+  </view>
+
+  <view class="addPerson addBtn margin-top-30" bindtap="navTo" data-path="../insurantAdd/insurantAdd"  data-nw="6.1993.vMjW"  data-nwname="新增被保人">
+      <image src="../image/add.png" class='addIcon'></image>
+      <!--新增被保人   data-nw="6.1155.bK1"  data-nwname="新增被保人"-->
+      <template is="btnView" data="{{data: [{class:'display-inline',text: '新增被保人'}]}}"/>
+  </view>
+
+
+  <view class="fixBtn {{isIpx?'isIpx':''}}">
+      <view class="form-submitBtn-one sureBtn"  bindtap="sureAdd"  data-nw="6.1993.O7dZ"  data-nwname="确定新增被保人">
+        <template is="btnView" data="{{data: [{class: 'bg-green', text: '确定'}]}}"/>
+      </view>
+  </view>
+</view>
+
+
+
+<include src="../template/uiCommon.wxml"/>

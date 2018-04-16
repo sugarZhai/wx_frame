@@ -1,0 +1,11 @@
+<view class="{{popStatus ? 'rule-pop u-show' : 'u-hide'}}">
+  <view class="box">
+    <!-- <view class="subtit">活动规则</view>
+    <view class="text">1. 活动时间:2月X日--2月15号</view>
+    <view class="text">2. 活动期间，写出一句你最想对TA说的话，帮你寄出内心深处的表白；</view>
+    <view class="text">3. 所有参与者赠送环球旅行险优惠券（8折券）；</view>
+    <view class="text">4. 若有用户出现违规行为（如作弊，刷单等），我们将取消您的活动参与资格，并有权撤销违规交易，回收您所得的奖励；</view>
+    <view class="text">5. 本次活动最终解释权归众安保险所有，如遇不可抗力，有权取消本次活动。</view>  -->
+  </view>
+  <view class="d-close" bindtap="toggleRules"></view>
+</view>

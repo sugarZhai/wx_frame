@@ -1,0 +1,59 @@
+<!--orderList.wxml-->
+<view wx:if='{{hasOrder}}'>
+  <view class="policy-tip">
+    <image src="../../image/orederList-header.png"></image>
+    <view class="text">
+      <view >咨询服务：24小时全球医疗援助热线 <view class="phoneNum" bindtap="call_phone" data-phone="+86 400-891-0152">+86 400-891-0152</view></view>
+      <view >理赔服务：自助线上报案，关注微信公众号 <view class="phoneNum" bindtap="set_data" data-prop="mod_layer_show" data-val="1" >马上飞</view></view>
+      <view ><text style="visibility: hidden;">理赔服务：</text>人工电话报案， <view class="phoneNum" bindtap="call_phone" data-phone="1010-9955">1010-9955</view></view>
+    </view>
+
+  </view>
+  <view class="policy-list">
+    <view class="policy-item" wx:for="{{listData}}" wx:key="policy">
+      <view class="flex-wrp-index title {{item.policyStatus=='expire'?'font-999' :''}} ">
+          <text wx:if="{{item.policyStatus == 'effective'}}"class="proccess">保障中</text>
+          <text wx:if="{{item.policyStatus == 'pending'}}"class="proccess orange">待生效</text>
+          <text wx:if="{{item.policyStatus == 'expire'}}" class="proccess gray">已失效</text>
+          <text wx:if="{{item.policyStatus !== 'issueFailed'}}" class="policy-page" data-contracturl='{{item.contractURL}}' bindtap="seePolicy" data-ilog="6.1042.cH0" >电子保单</text>
+          <text wx:if="{{item.policyStatus == 'issueFailed'}}" class="proccess red"> <text class="redFont">出单失败</text></text>
+          <text wx:if="{{item.policyStatus == 'issueFailed'}}" class="redQuestion" bindtap="set_data" data-prop="mod_layer_show" data-val="2"  >?</text>
+      </view>
+      <view class="detail  {{item.policyStatus=='expire'?'font-999' :''}}">
+        <view class="title {{item.policyStatus=='expire'?'font-999' :''}}">{{item.productName}}</view>
+        <view >被保人：<text>{{item.insuredUserName}} </text></view>
+        <view wx:if="{{item.policyStatus !== 'issueFailed'}}">保单号：<text>{{item.policyNo}} </text>  <view bindlongtap='tap_copy' data-copy="{{item.policyNo}}" class="longTap">[长按复制]</view></view>
+        <view wx:else>订单号：<text>{{item.orderNo}} </text>  <view bindlongtap='tap_copy' data-copy="{{item.orderNo}}" class="longTap">[长按复制]</view></view>
+        <view >保费：{{item.payFee}}元</view>
+        <view wx:if="{{item.policyStatus !== 'issueFailed'}}">保障期：{{item.policyStartDate}}-{{item.policyEndDate}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view  wx:else class="no-data" >
+  <image src="../../image/no-data.png"></image>
+  <view class="txt">您暂无保单！</view>
+</view>
+
+
+<!--弹出层 -->
+<view   class="normal-question fadein unnormal orderFail"   wx:if="{{mod_layer_show==='2'}}">
+  <view class= 'orderFailCtn '>
+    <image  src="../../image/orderFail.png" mode='widthFix'></image>
+    <view class=" positonPhone">电话：<view class="phoneNum" bindtap="call_phone" data-phone="1010-9955">1010-9955</view></view>
+    <view class=" positonBtn" data-prop="mod_layer_show" data-val="0" bindtap="set_data" ></view>
+  </view>
+</view>
+
+<!--弹出层   -->
+<view   class="normal-question fadein unnormal" wx:if="{{mod_layer_show==='1'}}">
+    <view class="mashangfei">
+        <image src="../../image/mashangfei.png"></image>
+    </view>
+    <view class=" ui-close fixedBtn" data-prop="mod_layer_show" data-val="0" bindtap="set_data" >×</view>
+</view>
+
+<include src="../template/uiCommon.wxml"/>
+<include src="../template/contactus.wxml"/>
+<include src="../template/logo.wxml"/>
+<include src="../template/tabBar.wxml"/>

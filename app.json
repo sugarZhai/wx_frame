@@ -1,0 +1,21 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/rescue/index",
+        "pages/weekendSelfdrive/index/index",
+        "pages/weekendSelfdrive/insurantList/insurantList",
+        "pages/weekendSelfdrive/order/order",
+        "pages/weekendSelfdrive/insurantAdd/insurantAdd",
+        "pages/weekendSelfdrive/orderList/orderList",
+        "pages/weekendSelfdrive/orderFail/orderFail",
+        "pages/weekendSelfdrive/webViewKefu/index",
+        "pages/weekendSelfdrive/forward/index",
+        "pages/weekendSelfdrive/orderSuccess/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "white",
+        "navigationBarTitleText": "旅行保险",
+        "navigationBarTextStyle": "black"
+    }
+}

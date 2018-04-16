@@ -1,0 +1,159 @@
+<!--index.wxml-->
+<view class="top-type">
+    <view>
+        <image style="width:19px;" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_top1.png"></image>众安品牌保障</view>
+    <view>
+        <image style="width:13px;" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_top2.png"></image>全程风险预防</view>
+    <view>
+        <image style="width:13px;" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_top3.png"></image>便捷在线理赔</view>
+</view>
+
+<!--活动配置===右下角的浮标  -->
+<image wx:if="{{false}}" style="position:fixed;bottom: 322rpx;right:0;width: 223rpx;height: 170rpx;z-index:999;" class='swing' src="{{zeroImageUrl}}" data-nw="6.1152.DA5c" data-nwname="0元购活动入口" bindtap="takeZero"></image>
+
+<import src="../template/formView.wxml" />
+<view style="padding-bottom:120rpx;">
+    <!-- <view class="banner" bindtap='toggleModal' data-ilog="6.1152.fX3">
+        <image  src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/distnongyao_bnr.png"></image>
+    </view> -->
+
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="banner" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="rgba(255,255,255,1)">
+        <swiper-item wx:if="{{showSanyueyinghua}}" bindtap='navTo' data-path="/pages/activityFrame/activityTpl/index?code=sanyueyinghua001&scene=2063">
+            <image src="{{imgUrls[4]}}" class="banner-image" />
+        </swiper-item>
+        <swiper-item bindtap="navTo" data-path="/pages/activityRecommend/index?scene=1405">
+            <image src="{{imgUrls[3]}}" class="banner-image" />
+        </swiper-item>
+        <swiper-item bindtap='navigateToMiniProgram' data-appid="wx44dd5b0fc1c1475a" data-path="pages/product/index?index=3" data-scene="{{scene}}">
+            <image src="{{imgUrls[0]}}" class="banner-image" />
+        </swiper-item>
+        <swiper-item bindtap='navigateToMiniProgram' data-appid="wx44dd5b0fc1c1475a" data-path="pages/product/index?index=1" data-scene="{{scene}}">
+            <image src="{{imgUrls[1]}}" class="banner-image" />
+        </swiper-item>
+        <swiper-item bindtap='navigateToMiniProgram' data-appid="wx472308d0001e8b8e" data-path="pages/productDetail/productDetail?index=0" data-scene="{{scene}}">
+            <image src="{{imgUrls[2]}}" class="banner-image" />
+        </swiper-item>
+
+        <!--<swiper-item bindtap="goAcc">-->
+        <!--<image  src="{{imgUrls[1]}}" class="banner-image" />-->
+        <!--</swiper-item>-->
+    </swiper>
+
+    <view class="risk-tip ui-1px-b" bindtap="goToNew" data-nw="6.1152.F3xI" data-nwname="旅行保险安全模块入口">
+        <view class="tip-box" wx:if="{{isSubscribe=='Y'}}">
+            <image mode="aspectFit" style="width:51px;" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_subscribe.png"></image>
+            <view class="title-box">
+                <view style="line-height:21px;max-height:42px;overflow:hidden;">{{subscribeTitle||''}}</view>
+            </view>
+            <view class="right arrow-right circle"></view>
+        </view>
+        <view class="tip-box" wx:elif="{{isSubscribe=='N'}}">
+            <image mode="aspectFit" style="width:31px;" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_unsubscribe.png"></image>
+            <view class="title-box">
+                <view class="ellipsis">目的地全程风险提示与服务</view>
+                <view class="title2 ellipsis">与6万人一样安全无忧的出行</view>
+            </view>
+            <view class="right arrow-right">GO</view>
+        </view>
+    </view>
+
+    <view class="tit-box {{fixedTitDefault?'ui-1px-b':''}}">
+        <text wx:for="{{travelType}}" wx:key="unique" class="{{currentActive==item.id?'active':''}}" data-id="{{item.id}}" bindtap="changeType">{{item.name}}</text>
+    </view>
+
+    <swiper style="height:{{430*prdsLength}}rpx" current="{{currentActive}}" bindchange="changeTravelType">
+        <swiper-item wx:for="{{prdsList}}" wx:key="unique">
+            <template is="imageView" wx:for="{{item}}" wx:key="unique" data="{{ data: [item] }}" />
+        </swiper-item>
+    </swiper>
+
+    <!-- <view class="item-tit nopt"><view class="icon-1"></view>综合旅行险</view>
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/inTravel-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx5f3f11cc100c089a', scene, nw: '6.1152.yW3', nwname: '旅行保险首页-境内旅行险'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_seasiatravelins/images/hongkong-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx44dd5b0fc1c1475a', scene, path:'pages/product/index?index=4', nw: '6.1152.sH3', nwname: '旅行保险首页-港澳旅行险'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_seasiatravelins/images/southAsia-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx44dd5b0fc1c1475a', scene, path:'pages/product/index?index=0', nw: '6.1152.rF9', nwname: '旅行保险首页-日韩东南亚旅行险'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_seasiatravelins/images/pic_entry_eu-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx44dd5b0fc1c1475a', scene, path:'pages/product/index?index=1', nw: '6.1152.eG9', nwname: '旅行保险首页-申根旅行险'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_seasiatravelins/images/pic_entry_jp-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx44dd5b0fc1c1475a', scene, path:'pages/product/index?index=2', nw: '6.1152.mF4', nwname: '旅行保险首页-飞享日本旅行险'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_seasiatravelins/images/pic_entry_global-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx44dd5b0fc1c1475a', scene, path:'pages/product/index?index=3', nw: '6.1152.fL9', nwname: '旅行保险首页-环球旅行险'  }] }}"
+    />
+
+    <view class="item-tit bt">
+        <view class="icon-2"></view>特色旅行险</view>
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/ski-new1.png?11', bindtap: 'navigateToMiniProgram', appid: 'wx472308d0001e8b8e', scene, path:'pages/productDetail/productDetail?index=0', nw: '6.1037.gI1', nwname: '旅行保险首页-滑雪险'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/eat-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx472308d0001e8b8e', scene, path:'pages/productDetail/productDetail?index=1', nw: '6.1037.vZ3', nwname: '旅行保险首页-放心吃'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/high-new.png', bindtap: 'navigateToMiniProgram', appid: 'wx472308d0001e8b8e', scene, path:'pages/productDetail/productDetail?index=2', nw: '6.1037.nM3', nwname: '旅行保险首页-高原游'  }] }}"
+    />
+
+    <view class="item-tit bt">
+        <view class="icon-3"></view>航空出行保障</view>
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/flyToLife.png', bindtap: 'navigateToMiniProgram', appid: 'wx6d12e6ef360937c1', scene, path:'pages/index/index?', nw: '6.1037.gI1', nwname: '飞享一生'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/delay.png', bindtap: 'navigateToMiniProgram', appid: 'wxd4a90ae9de03335a', scene, path:'pages/index/index?', nw: '6.1037.vZ3', nwname: '机场延误险'  }] }}"
+    />
+    <template is="imageView" data="{{ data: [{ class: 'mashup', src: 'https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/accident.png', bindtap: 'navigateToMiniProgram', appid: 'wx40fcf84cdace07d0', scene, path:'pages/index/index?', nw: '6.1037.gI1', nwname: '机场意外险'  }] }}"
+    /> -->
+
+    <view class='za-logo-box'>
+        <image class="za-logo" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/za_logo.png"></image>
+    </view>
+</view>
+
+
+
+
+<!--<view class="rongyao-modal" wx:if="{{showModal}}">-->
+<!--<view class="content">-->
+<!--<view class="modal-body">-->
+<!--<view class="h2">活动规则</view>-->
+<!--<view class="txt">-->
+<!--<text>1. 活动期间内一次性购买以下产品，可获取任意288点券的王者荣耀英雄的皮肤一个或者2-15天相应国家的上网卡（皮肤和上网卡任选其一，团购活动与此活动仅能参与其中一个）。具体详情如下：</text>-->
+<!--<image mode="widthFix" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/index_rule_tb.png" style="margin: 0; width: 100%"></image>-->
+<!--<text>2. 上网卡库存有限，先到先得，需提前5日购买，以防礼品不能及时寄出。支持地区：日本、中国香港、泰国、韩国、中国台湾、中国澳门、柬埔寨、马来西亚、新加坡、老挝。</text>-->
+<!--<text>3. 若您在保单起期前退保，需将上网卡寄回，在确认订单号后，方可进行退保申请，邮费自理；王者荣耀皮肤保单生效后可申请赠送。</text>-->
+<!--<text>4. 购保后，满足条件者，进入“旅行保险”我的保单菜单，将购买记录截图和收货地址发给微信客服，并回复“领奖”，作为标签方便我们查找，就会有客服美眉联系你哦。也可拨打客服电话：1010-9955，联系我们，如下图所示：</text>-->
+<!--<image mode="widthFix" src="../../image/rongyao-tips.png"></image>-->
+<!--<text>5. 若有用户出现违规行为（如作弊、刷单等），我们将取消您的活动参与资格，并有权撤销违规交易，回收您已获得的奖励。</text>-->
+<!--<text>6. 本次活动最终解释权归众安保险所有。</text>-->
+<!--</view>-->
+<!--</view>-->
+<!--<view class="modal-footer" bindtap="toggleModal">×</view>-->
+<!--</view>-->
+
+<!--</view>-->
+
+<!-- 1212活动 -->
+<view wx:if="{{ activityStarted }}" class="logo-211 {{showLogo ?'logo-211-trans':''}}" data-path="/pages/activity1212/index" bindtap="navTo">
+    <image src='https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/activity-1212.png'></image>
+</view>
+
+<view class="activity-modal" wx:if="{{ activityModalVisible && activityStarted && isFirstAccess }}">
+    <view class="activity-modal-frame">
+        <image class="frame-bg-img" mode="widthFix" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/1212/coming.png" />
+        <button class="frame-btn" data-path="/pages/activity1212/index" bindtap="navTo">开启双12年终高潮</button>
+    </view>
+    <view class="activity-modal-close">
+        <image bindtap="set_data" data-prop="activityModalVisible" data-val="{{false}}" class="close-btn" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/1212/close-btn.png" />
+    </view>
+</view>
+<!--风险提示弹窗-->
+<view class="activity-modal" wx:if="{{risktipVisible}}">
+    <view class="risktip-pop">
+        <image class="risktip-img" mode="widthFix" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/safeguide/images/riskTipToast.png" />
+        <button data-path="/pages/safeGuide/index/index" data-nwname="风险提示首页浮层" data-nw="6.1152.xFWr" bindtap="navTo">戳我 选目的地</button>
+    </view>
+    <view class="risktip-pop-close">
+        <image bindtap="set_data" data-prop="risktipVisible" data-val="{{false}}" class="close-btn" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/1212/close-btn.png" />
+    </view>
+</view>
+<!--三月樱花活动悬浮入口-->
+<view bindtap="navTo" wx:if="{{showSanyueyinghua}}"
+      data-path="/pages/activityFrame/activityTpl/index?code=sanyueyinghua001&scene=2064"
+      class="logo-yh"></view>
+<include src="../template/uiCommon.wxml" />
+<include src="../template/tabBar.wxml" />

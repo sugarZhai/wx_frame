@@ -1,0 +1,1 @@
+<button class="pkBtn" open-type="share" bindtap="push_asm" data-ilog="{{pklog}}"><Image mode="widthFix" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/pkbtn.png"></Image></button>

@@ -1,0 +1,57 @@
+<!--insurantAdd.wxml-->
+<view class="container">
+  <form bindsubmit="formSubmit" class="form" >
+    <view class="form-item-box">
+      <view class="flex-wrp-index form-item">
+        <view class="item-label">被保人姓名</view>
+         <input 
+          bindinput="bindFormData" 
+          data-name="insuredUserName"
+          data-regular='name'
+          value="{{formData.insuredUserName}}" 
+          name="insuredUserName" 
+          class="item-input " 
+          type="text"  
+          placeholder="点击输入姓名" />
+      </view>
+      <view class="flex-wrp-index form-item">
+          <view class="item-label">身份证号</view>
+          <input 
+            bindinput="bindFormData" 
+            data-name="insuredCertiNo"    
+            maxlength="18"  
+            value="{{formData.insuredCertiNo}}" 
+            name="insuredCertiNo" 
+            class="item-input " 
+            type="idcard"  
+            placeholder="点击输入身份证号" />
+          
+      </view>
+    </view>
+
+    <view class="form-item-box margin-top-30">
+      <view class="flex-wrp-index form-item">
+        <view class="item-label">与投保人关系</view>
+        <picker class="item-input arrow-down  " 
+          bindchange="bindPickerChange" 
+          value="{{formData.relation}}" 
+          range="{{personRelation}}">
+          <view class="picker">
+            {{personRelation[formData.relation]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    
+    <view class="fixBtn {{isIpx?'isIpx':''}}">
+      <view class="form-submitBtn-one sureBtn"   data-nw="6.1994.nSgL"  data-nwname="保存被保人信息" bindtap="noop"> 
+      <button class="bg-green"  formType="submit">
+          保存
+        </button>
+      </view>
+    </view>
+  </form>
+</view>
+
+
+<include src="../template/uiCommon.wxml"/>

@@ -1,0 +1,12 @@
+<view>
+<view class="orderSuccess">
+<image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/weekend_selfdrive/orderSuccess.png"></image>
+</view>
+<view class="backBtn">
+   <view class="backItem" bindtap="navTo"  data-path="../../index/index"><text>返回首页</text></view>
+   <view class="backItem"><text class="blueBack" bindtap="navTo" data-path="../orderList/orderList">查看保单</text></view>
+</view>
+<view class="bannerImg">
+ <image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/weekend_selfdrive/bannerEnter.png"></image>
+</view>
+</view>

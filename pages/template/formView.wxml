@@ -1,0 +1,41 @@
+<template name="btnView">
+    <form 
+      report-submit='true' bindsubmit='sendFormId' 
+      data-nw='{{data[0].nw}}' data-nwname='{{data[0].nwname}}'
+      data-formsource='{{data[0].formsource}}'
+    >
+      <view 
+        class='relative {{data[0].class}}' bindtap="btnViewClick"
+        data-click='{{data[0].bindtap}}' data-outterData="{{data[0]}}"
+      >
+        {{data[0].text}}
+        <button class='btnViewClass' open-type="{{data[0].share ? 'share' : ''}}" form-type='submit'></button>
+      </view>
+    </form>
+  </template>
+  
+  <template name='imageView'>
+    <form
+      report-submit='true' bindsubmit='sendFormId' 
+      data-nw='{{data[0].nw}}' data-nwname='{{data[0].nwname}}'
+      data-formsource="{{data[0].formsource||''}}"
+    >
+      <view 
+        class='relative {{data[0].class}}' bindtap="btnViewClick"
+        data-click='{{data[0].bindtap}}' data-outterData="{{data[0]}}"
+      >
+       {{data[0].text}}
+        <image class="icon-king" wx:if="{{data[0].isStar=='Y'}}" src='https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/prds/icon_king.png'></image>
+        <image src='{{data[0].src}}'></image>
+        <button class='btnViewClass' form-type='submit'></button>
+      </view>
+    </form>
+  </template>
+  <template name='listItem'>
+    <view
+      class=' template-list-item {{data[0].class}} {{data[0].needArrow ? "arrow-right" :""}}'
+    >
+        <template is='btnView' data="{{data}}"/>
+    </view>
+  </template>
+  

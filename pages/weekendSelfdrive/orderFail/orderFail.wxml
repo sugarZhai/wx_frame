@@ -1,0 +1,13 @@
+<!--orderFail.wxml-->
+<view class="container">
+    <icon type="warn" size="100" />
+    <view class="tipfirst fz18">购买失败，你的信息有异常</view>
+    <view class="fz13 c-666">钱在第二日全额退还至您的支付帐户，</view>
+    <view class="fz13 c-666 mt5">有疑问可拨打1010-9955寻求客服美眉帮助</view>
+    <button type="primary" hover-class="none"  bindtap="go_home"  data-nw="6.1992.LcX9"  data-nwname="返回首页" >返回首页</button>
+</view>
+
+
+<include src="../template/contactus.wxml"/>
+<include src="../template/logo.wxml"/>
+<include src="../template/uiCommon.wxml"/>

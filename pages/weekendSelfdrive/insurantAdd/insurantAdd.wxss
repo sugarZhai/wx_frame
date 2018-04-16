@@ -1,0 +1,3 @@
+/* insurantAdd.wxss */
+@charset "UTF-8";
+@import "../week.wxss";

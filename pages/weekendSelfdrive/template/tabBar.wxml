@@ -1,0 +1,28 @@
+<view class="flex-wrp-index tabBar" wx:if="{{ui_tab.current=='index'}}" >
+    <view class="tabBar-item " bindtap="tab_jump" data-path='../productDetail/productDetail' data-ilog="6.1042.oN1">
+      <view>
+        <image src="../image/icon_homepage_hl.png"></image>
+      </view>
+      <view class="green">首页</view>
+    </view>
+    <view class="tabBar-item " bindtap="tab_jump" data-path='../orderList/orderList' data-ilog="6.1037.nL1">
+      <view >
+        <image src="../image/policy-no.png"></image>
+      </view>
+      <view>我的保单</view>
+    </view>
+</view> 
+<view class="flex-wrp-index tabBar" wx:else >
+    <view class="tabBar-item " bindtap="tab_jump" data-path='../productDetail/productDetail' data-ilog="6.1042.oN1">
+      <view>
+        <image src="../image/icon_homepage_nor.png"></image>
+      </view>
+      <view >首页</view>
+    </view>
+    <view class="tabBar-item  " bindtap="tab_jump" data-path='../orderList/orderList' data-ilog="6.1037.nL1">
+      <view >
+        <image src="../image/policy.png"></image>
+      </view>
+      <view class="green ">我的保单</view>
+    </view>
+</view> 

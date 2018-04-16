@@ -1,0 +1,184 @@
+<!--order.wxml-->
+<view class="container">
+  <form bindsubmit="formSubmit" class="form"  data-nw="6.1992.If31"  data-nwname="确认购买"  >
+    <view class="form-item-box">
+      <view class="flex-wrp-index form-item margin-top-30 ">
+        <view class="item-label">保险生效日期</view>
+        <picker class="item-input arrow-down  " mode="date"  bindchange="bindPickerChange"  start="{{effectiveDate.start}}" end="{{effectiveDate.end}}">
+          <view class="picker">
+            {{formData.effectiveDate}}
+          </view>
+        </picker>
+      </view>
+      <view class="flex-wrp-index form-item">
+          <view class="item-label">保险终止日期</view>
+          <picker name='expiryDate' value="{{formData.expiryDate}}" class="item-input disabled" mode="date"  disabled="true">
+            <view class="picker">
+              {{formData.expiryDate}}
+            </view>
+          </picker>
+
+      </view>
+    </view>
+
+    <view class="from-tip color-000">投保人信息 <text class="color-80AEB3">（请填写本人信息）</text></view>
+    <view class="form-item-box margin-top-30"  wx:if='{{ fistInput=="0"? true:false }}' >
+      <view class="flex-wrp-index form-item">
+        <view class="item-label">姓名</view>
+        <input 
+          bindinput="bindFormData" 
+          data-name="insuredUserName"
+          data-regular='name'
+          disabled="{{isDisName}}"
+          value="{{formData.insuredUserName}}" 
+          name="insuredUserName" 
+          class="item-input " 
+          type="text"  
+          placeholder="请填写本人信息，购买后不可更改" />
+      </view>
+      <view class="flex-wrp-index form-item">
+          <view class="item-label">身份证号</view>
+          <input 
+            bindinput="bindFormData"
+            data-name='insuredCertiNo' 
+            disabled="{{isDisID}}" 
+            value="{{formData.insuredCertiNo}}" 
+            class="item-input" 
+            name="insuredCertiNo" 
+            maxlength="18"  
+            class="item-input" 
+            type="idcard" 
+            placeholder="请输入身份证号码"  />
+      </view>
+      <view class="flex-wrp-index form-item phone-wrp">
+        <view class="item-label">手机号</view>
+        <input 
+          bindinput="bindFormData" 
+          data-name='insuredPhone' 
+          disabled="{{isDisPhone}}" 
+          value="{{formData.insuredPhone}}" 
+          class="item-input"
+          name="insuredPhone"  
+          class="item-input" 
+          type="number" 
+          placeholder="请输入手机号码"  
+          placeholder-style="font-size:24rpx;"/>
+        <button  class="getPhone {{!isDisPhone ? '':'display'}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> </button>
+      </view>
+    </view>
+    
+    <view class="flex-wrp-index firstMsg margin-top-30"   wx:else>
+      <view class="">
+         <view class="">{{newMaskName}}  </view>
+        <view class="" >身份证  {{newMaskID}}</view>
+        <view class="">手机号  {{newMaskPhone}}</view>
+      </view>
+      <view class="left-border" bindtap="changeMsgCard" >
+        修改
+      </view>
+    </view>
+
+    <view class="from-tip color-000">被保人信息 <text class="color-80AEB3">（保险受益人为法定受益人）</text></view>
+    <view class="form-item-box margin-top-30" >
+      <view class="flex-wrp-index form-item">
+        <view class="item-label">同投保人</view>
+        <switch  bindchange="switchChange" checked="{{switchBtn}}" />
+      </view>
+      <view class="flex-wrp-index form-item" wx:if="{{switchBtn}}">
+        <view> {{formData.insuredUserName}} <text class="flag-self">本人</text></view>
+      </view>
+    </view>
+
+    <view class="form-item-box margin-top-30 " wx:for="{{insurantList}}" wx:key='insurantList' wx:if="{{item.checked}}">
+      <view class="flex-item flex-10   group"  >
+        <view class="flex-wrp-index item item-name ">
+          <view>
+            <text class="overHidden">{{item.name}}</text>
+            <text class="flag-other" wx:if='{{item.relation===1}}'>父母</text>
+            <text class="flag-other" wx:elif= '{{item.relation===2}}'>配偶</text>
+            <text class="flag-other" wx:elif= '{{item.relation===3}}'>子女</text>
+            <text class="flag-other" wx:else>其他</text>
+          </view>
+          <view class="two-icon">
+            <view bindtap="deletItem"  data-index='{{index}}' ><image class="icon" src="../image/trash.png"></image></view>
+            <view bindtap="toEditInsurant" data-index='{{index}}' data-path="../insurantAdd/insurantAdd"><image class="icon" src="../image/edit.png"></image></view>
+          </view>
+        </view>
+        <view class="item item-id">
+          身份证号  {{item.idNo}}
+        </view>
+      </view>
+    </view>
+    <view class="addPerson" bindtap="navToAddInsurant"  >
+        <view class="addBtn" >
+          <!-- <text class="addIcon">+</text> -->
+          <image src="../image/add.png" class='addIcon'></image>
+          添加被保人
+        </view>
+      </view>
+
+    <view class="from-tip color-666">发票信息
+      <text class="color-80AEB3">（提供电子发票，开票金额等同于支付金额）</text>
+      <image bindtap="toggleInvoiceExplain" src="../image/icon-doubt.png" mode="widthFix" class='icon-doubt'></image>
+    </view>
+    <view class="form-item-box margin-top-30" >
+      <view class="flex-wrp-index form-item">
+        <view class="item-label">需要发票</view>
+        <switch  bindchange="invoiceChange" checked="{{needInvoice}}" />
+      </view>
+      <block wx:if="{{needInvoice}}">
+        <view class="flex-wrp-index form-item">
+          <view class="item-label">发票抬头</view>
+          <input 
+            bindinput="bindFormData" 
+            data-name="invoiceName"
+            name="invoiceName" 
+            class="item-input " 
+            type="text"  
+            placeholder="请填写个人或公司名称" 
+            placeholder-style="font-size:24rpx;" />
+        </view>
+        <view class="flex-wrp-index form-item">
+          <view class="item-label">纳税人识别号</view>
+          <input 
+            bindinput="bindFormData" 
+            data-name="invoiceNum"  
+            name="invoiceNum" 
+            class="item-input " 
+            type="text"  
+            placeholder="请填写纳税人识别号（选填）" 
+            placeholder-style="font-size:24rpx;"/>
+        </view>
+      </block>
+    </view>
+
+    <view class="from-tip aggrement-tip">
+      <checkbox-group bindchange="checkboxChange">
+        <label >
+          <checkbox name="aggrement" value="1" checked="{{formData.aggrement}}" ></checkbox>
+        </label>
+        我同意 <view class="ag" bindtap="detailPdf" data-url="{{needKnow}}">【投保须知】</view>和<view bindtap="detailPdf" data-url="{{insRule}}" class="ag">【保险适用条款】</view>
+      </checkbox-group>
+    </view>
+    <include  src="../template/logo.wxml"/>
+
+    <view class="fixBtn {{isIpx?'isIpx':''}}">
+      <view class="form-submitBtn-one flex-wrp-index">
+        <view class="flex-item price"><text class="rmb">¥</text><text class="num">{{totalPrice}}</text><text wx:if="{{totalPrice!==0 && useCoupon}}">优惠券已使用</text> </view>
+        <button class="flex-item submit"  disabled="{{submitDisable}}" formType="submit"  >确认购买</button>
+      </view>
+    </view>
+
+  </form>
+</view>
+
+<view id="modal-container" wx:if="{{showInvoiceExplain}}">
+   <view class="modal-content">
+     <text>1. 根据国家税务总局公告2015年第84号的规定，增值税电子普通发票的法律效力、基本用户、基本使用规定等与税务机关监制的增值税普通发票相同。如需纸质报销，可将电子文档进行打印。
+2. 消费中包含的优惠券金额、及其他优惠金额不支持开具发票。开票金额等同于实际支付金额。</text>
+     <image bindtap="toggleInvoiceExplain" src="../image/close.png" mode="widthFix"></image>
+   </view>
+</view>
+
+
+<include src="../template/uiCommon.wxml"/>

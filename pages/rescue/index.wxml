@@ -1,0 +1,49 @@
+<view class='head'>
+            <view class="nav">
+                     <view class="{{currentTab==0?'bold border':'default'}}"  data-current="0" bindtap="changeTab">境外救援</view>
+                    <view class="{{currentTab==1?'bold border':'default'}}"  data-current="1" bindtap="changeTab">飞享日本救援</view>
+                    <view class="{{currentTab==2?'bold border':'default'}}"  data-current="2" bindtap="changeTab" >境内救援</view>    
+            </view>
+</view>
+<view class="show">
+          <view class="server">
+                    <view class="server1">
+                            <view class="server-tips question" bindtap="set_data" data-prop="mod_question_show" data-val="1" >{{rescueData.tips}}</view>
+                  </view>  
+                     <view class="con-flex" >
+                           <view class="{{currentTab==0 ? 'con-flex1 u-1of2' : 'three'}}" wx:for="{{rescueData.types}}">
+                                     <image  class="con-flex1-image"src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/rescue/rescue-icon.png"/>
+                                     <view >{{item}}</view>
+                           </view>
+                  </view>   
+                  <view class="save-center">
+                            <image  style="width:{{rescueData.center.width}};height:{{rescueData.center.height}};margin-right:10rpx;"src="{{rescueData.center.logoImg}}" />
+                            <!-- <text>救援服务由 {{rescueData.center.centerName}} 提供</text> -->
+                  </view>
+         </view> 
+          <view class="save-type">
+                  <view class="type1" wx:for="{{rescueData.content}}">
+                           <view class="save-title1">{{item.title}}</view>
+                           <view class="save-server1 {{(active[0] == index && active[1]==idx)? 'active':' '}}"  wx:for-index="idx"  wx:for="{{item.list}}">
+                                    <view class="save-server1-title arrow"  data-index="{{[index,idx]}}"  bindtap="showDetail">{{item.title}}</view>
+                                    <view class="txt"><view wx:for="{{item.txt}}">{{item}}</view></view>
+                           </view>  
+                  </view>
+         </view>    
+</view>
+<!--救援规则说明-->
+ <view class="rescue-phone"  bindtap="callPhone">
+             <image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/rescue/phone.png"></image>
+             拨打救援电话
+</view> 
+<view  class="rule normal-question fadein  unnorma"  wx:if="{{mod_question_show==='1'}}">
+        <view class="rule-con">
+                <view class="con-title">救援服务说明</view>
+                <view class="con-con">
+                        <view wx:for="{{rescueData.ruleList.ruleCon}}">{{item}}</view>
+                </view>
+        </view>
+        <view class="closeDetail">
+                 <view class="ui-close "  data-prop="mod_question_show" data-val="0" bindtap="set_data" wx:if="{{contactus_open==1 ? false:true}}">×</view>
+        </view>
+</view>

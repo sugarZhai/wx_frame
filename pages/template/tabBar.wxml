@@ -1,0 +1,42 @@
+<view class="flex-wrp tabBar {{isIpx ? 'isIpx':''}} " wx:if="{{ui_tab.current=='index'}}" >
+        <view class="tabBar-item " data-path='../index/index' data-ilog="6.1161.bH8">
+                <view><image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_homepage_hl.png"/></view>
+                <view class="green">首页</view>
+        </view>
+         <view class="tabBar-item" bindtap="tab_jump" data-path='../safeGuide/index/index' data-ilog="6.1152.gA3">
+                 <view ><image style="width:46rpx;height:40rpx;margin-left:15rpx;" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/safeguide/images/discover_hidden2.png"/></view>
+                 <view>安全无忧</view>
+        </view>
+        <view class="tabBar-item " bindtap="tab_jump" data-path='../profile/profile' data-ilog="6.1152.gA3">
+                <view ><image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/policy-no.png"/></view>
+                <view>我的</view>
+        </view>
+</view> 
+<view class="flex-wrp tabBar {{isIpx ? 'isIpx':''}}" wx:if="{{ui_tab.current=='discover'}}" >
+        <view class="tabBar-item " bindtap="tab_jump"  data-path='../../index/index' data-ilog="6.1161.bH8">
+                <view><image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_homepage_nor.png"/></view>
+                <view >首页</view>
+        </view>
+        <view class="tabBar-item" data-ilog="6.1152.gA3">
+                <view ><image style="width:46rpx;height:40rpx;margin-left:15rpx;"src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/safeguide/images/discover_show2.png"/></view>
+                <view class="green">安全无忧</view>
+        </view>
+        <view class="tabBar-item " bindtap="tab_jump" data-path='../../profile/profile' data-ilog="6.1152.gA3">
+                <view ><image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/policy-no.png"/></view>
+                <view>我的</view>
+        </view>
+</view> 
+<view class="flex-wrp tabBar {{isIpx ? 'isIpx':''}}" wx:if="{{ui_tab.current=='orderList'}}">
+    <view class="tabBar-item " bindtap="tab_jump" data-path='../index/index' data-ilog="6.1161.bH8">
+            <view><image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/icon_homepage_nor.png"/></view>
+            <view >首页</view>
+    </view>
+     <view class="tabBar-item" bindtap="tab_jump" data-path='../safeGuide/index/index'>
+                <view ><image style="width:46rpx;height:40rpx;margin-left:15rpx;" src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/safeguide/images/discover_hidden2.png"/></view>
+                <view>安全无忧</view>
+      </view>
+    <view class="tabBar-item" data-path='../profile/profile' data-ilog="6.1152.gA3">
+            <view ><image src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/policy.png"/> </view>
+            <view class="green ">我的</view>
+    </view>
+</view> 

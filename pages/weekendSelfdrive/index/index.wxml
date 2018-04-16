@@ -1,0 +1,157 @@
+<import src="../template/formView.wxml"/>
+<!--productDetail.wxml-->
+<view>
+    <view class="banner ">
+        <image src="{{productData.bgImg}}"></image>
+        <template is="imageView" data="{{data: [{class: 'subImg', src: productData.subBgImg, bindtap: 'toOtherWxapp', appid:'wx3860781d95d8589d'}]}}"/>
+    </view>
+    <view class="card-box">
+        <view class="card">
+            <view class="choose-list flex-wrp-index" >
+                <view class='list-item {{index===insurantTypeChecked ?"list-item-seletced":""}} ' wx:for="{{productData.insurantType}}" wx:key="insurantType"  bindtap='switchInsurantType' data-val='{{index}}' data-nw="{{item.ilog}}" data-nwname="保险计划">
+                    <view class="raletive {{item.activeImg ?item.activeImg:'' }}">
+                        <!-- <text>{{item.title}}</text> -->
+                        <template is="btnView" data="{{data: [{text: item.title}]}}"/>
+                        <!-- <text class="sml-font">{{item.subTitle}}</text> -->
+                        <template is="btnView" data="{{data: [{class: 'sml-font', text: item.subTitle}]}}"/>
+                    </view>
+
+                </view>
+            </view>
+             <view class="flex-wrp-index title arrow-right" bindtap="set_data" data-prop="mod_layer_show" data-val="2"  data-nw="{{productData.ilog[0]}}" data-nwname="保险责任">
+              <text >保险责任</text>
+            </view> 
+            <!-- <template is="btnView" data="{{data: [{class: 'flex-wrp-index title arrow-right', text: '保险责任', bindtap:'set_data', nw: productData.ilog[0], nwname: '保险责任', prop: 'mod_layer_show', val: '2'}]}}"/> -->
+            <view class="detail" >
+                <view  wx:for="{{curCardList}}" wx:key="card">
+                    <view class="flex-wrp-index ">
+                        <text class="proccess " >{{item.ins}}</text>
+                        <view>{{item.insAmount}}</view>
+                    </view>
+                    <!-- <block wx:if="{{item.insList}}" >
+                      <view class="onefont-left"  wx:for="{{item.insList}}" wx:key="insList" wx:for-item="listItem" >
+                        {{listItem}}
+                      </view>
+                    </block> -->
+                </view>
+
+                <view class="hotClick"  bindtap="showMore" wx:if="{{showPackUp}}" >
+                    <view class="packUp {{packUp?'putdown':''}}"></view>
+                </view>
+            </view>
+        </view>
+        <!-- <image class='feature-img' mode='widthFix' src="https://tac-cdn.zhongan.com/wxapp/wxapp_traval_ins_in_one/weekend_selfdrive/weekLongBanner.png"></image> -->
+        <view class="list">
+            <template is="listItem"   data="{{ data: [{ needArrow:true ,text: '救援服务', bindtap:'go_rescue'}]}}" />
+            <template is="listItem"   data="{{ data: [{text:'售后及理赔',  needArrow:true ,nw: productData.ilog[1], nwname: item, bindtap:'set_data', prop:'mod_layer_show' , val:'3' }]}}" />
+
+            <template is="listItem"   data="{{ data: [{text:'常见问题',  needArrow:true ,nw: productData.ilog[2], nwname: item, bindtap:'set_data', prop:'mod_layer_show' , val:'1' }]}}" />
+
+            <template is="listItem"   data="{{ data: [{ needArrow:true ,text: '投保须知',nw: productData.ilog[3], nwname: item, bindtap:'detailPdf', url:productData.insurantType[insurantTypeChecked].needKnow }]}}" />
+
+            <template is="listItem"   data="{{ data: [{ needArrow:true ,text: '保险条款',nw: productData.ilog[4], nwname: item, bindtap:'detailPdf', url:productData.insurantType[insurantTypeChecked].insRule }]}}" />
+        </view>
+
+        <image class="img-logo" src="../image/logo.png"></image>
+    </view>
+
+    <view class="fixBtn {{isIpx?'isIpx':''}}">
+        <view class="form-submitBtn-one flex-wrp-index">
+            <view class="float-text" wx:if="{{isShowShareTips}}">
+                <text>动员好友，为出行挑份保障</text>
+            </view>
+            <button class="order-list share-btn" bindtap="navTo"  data-path="../../activityRecommend/poster/index?index=5&scene={{scene}}" data-nw="6.1153.k7b5">
+                <image src="https://tac-cdn.zhongan.com/wxapp/wxapp_seasiatravelins/images/share-icon.png"></image>分享
+            </button>
+            <view class="price"><text class="rmb">¥</text><text class="num">{{price}}</text> 起</view>
+            <template is="btnView" data="{{data: [{class: 'submit', text: '立即投保', bindtap:'toOrder', nw: productData.ilog[5], nwname: '立即投保'}]}}"/>
+        </view>
+    </view>
+
+</view >
+<view  class="caseModal fadein {{isIpx?'isIpx':''}}"  wx:if="{{mod_layer_show==='4'}}" bindtap="resetPrice">
+    <view class="container">
+        <block >
+            <view class="title">保障方案</view>
+            <view class="flex-wrp-index case-button">
+                <view class='{{index===caseModal.chooseCase ?"checked":""}}'  wx:for="{{insurantPriceArr}}" wx:key="insurantPriceArr" catchtap="computedPrice" data-prop="chooseCase" data-val='{{index}}' >
+                    <template is="btnView" data="{{data: [{text: item.title}]}}" />
+                </view>
+            </view>
+        </block>
+        <block >
+            <view class="title">保障期限</view>
+            <view class="flex-wrp-index case-button">
+                <view  class='{{index===caseModal.chooseDate ?"checked":""}}'  wx:for="{{insurantPriceArr[0].case}}" wx:key="insurantPriceArrCase" catchtap="computedPrice" data-prop="chooseDate" data-val='{{index}}'>
+                    <template is="btnView" data="{{data: [{text: item.date}]}}" />
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+
+<!--售后及理赔-->
+<view  class="normal-question fadein  unnormal" wx:if="{{mod_layer_show==='3'}}" >
+    <view class="faq-box">
+        <view class="faq-title">{{productData.compensate.title}}</view>
+        <view class="faq-list" wx:for="{{productData.compensate.item}}" wx:key="compensate">
+            <view class="qust">{{item.qust}}</view>
+            <view class="answ" wx:if="{{!item.isAnswArr}}">{{item.answ}}</view>
+            <view wx:else >
+                <view wx:for="{{item.answ}}" wx:key="answ" wx:for-item="answItem">
+                    <view class="tip-title" > {{answItem.itemTitle}}</view>
+                    <view class="answ">
+                        <view class="faq-list"  wx:for="{{answItem.answList}}" wx:key="answ" wx:for-item="answList"  wx:for-index="num">
+                            <view class="proNum">{{num+1}}</view>
+                            <view class=" proCon">{{answList}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view >
+    </view>
+    <include src="../template/contactus.wxml"/>
+    <view class="close">
+        <view class="ui-close " data-prop="mod_layer_show" data-val="0" bindtap="set_data" wx:if="{{contactus_open==1 ? false:true}}">×</view>
+    </view>
+</view>
+
+<!--保险明细-->
+<view   class="normal-question fadein unnormal" wx:if="{{mod_layer_show==='2'}}">
+    <view class="faq-box">
+        <view class="faq-title">{{productData.insDetail.title}}</view>
+        <view class="faq-list" wx:for='{{productData.insDetail.item}}' wx:key='insDetail' wx:if="{{item.insAmount[insurantTypeChecked]!==''}}">
+            <view class="qust">{{item.qust}}<text style="position:absolute;top:4rpx;right:16rpx;">{{item.insAmount[insurantTypeChecked]}}</text></view>
+            <view class="qust">{{item.subqust}}</view>
+            <view class="answ">{{item.answ}}</view>
+        </view>
+    </view>
+    <include src="../template/contactus.wxml"/>
+    <view class="close">
+        <view class="ui-close "  data-prop="mod_layer_show" data-val="0" bindtap="set_data" wx:if="{{contactus_open==1 ? false:true}}">×</view>
+    </view>
+</view>
+
+<!--常见问题-->
+<view  class="normal-question commonQust " wx:if="{{mod_layer_show==='1'}}">
+    <view class="faq-box">
+        <view class="faq-title">{{productData.commonQust.title}}</view>
+        <view class="faq-list " wx:for='{{productData.commonQust.item}}' wx:key='commonQust'>
+            <image class="icon-faq" src="/image/icon_faq.png"></image>
+            <view class="qust">{{item.qust}}</view>
+            <block wx:for="{{item.answ}}"  wx:key='answItem'  wx:for-item="answItem">
+                <view  class="answ" >{{answItem}}</view>
+            </block>
+        </view>
+    </view>
+    <include src="../../template/contactus.wxml"/>
+    <view class="close">
+        <view class="ui-close " data-prop="mod_layer_show" data-val="0" bindtap="set_data" wx:if="{{contactus_open==1 ? false:true}}">×</view>
+    </view>
+</view>
+
+
+<include src="../template/uiCommon.wxml"/>
+
